@@ -34,14 +34,14 @@ MAX_SEQUENCE_LENGTH=20
 EMBEDDING_DIM=50
 
 # Load the raw data:
-X_train, Y_train, X_test, Y_test = functions_vectorizeClickbait.load_data()
+X_train_raw, Y_train, X_test_raw, Y_test = functions_vectorizeClickbait.load_data()
 
 # Now tokenize the data and pad them to max length of 20 tokens. Also, return
 # the tokenizer (a keras.proprocessing.text.Tokenizer object)
 X_train, Y_train, X_test, Y_test, tokenizer = \
-    functions_vectorizeClickbait.tokenize(X_train, 
+    functions_vectorizeClickbait.tokenize(X_train_raw, 
                                Y_train, 
-                               X_test, 
+                               X_test_raw, 
                                Y_test,
                                max_nb_words=MAX_NB_WORDS,
                                max_sequence_length=MAX_SEQUENCE_LENGTH)
@@ -106,6 +106,7 @@ for m in np.array((200, 100, 25, 5)):
                             learning_rate=LEARNING_RATE, 
                             nystrom_dim=m,
                             R=r,
+                            gamma=0.1,
                             print_iterations=PRINT_ITERATIONS)
         model.construct_Q()    
         model.train() 

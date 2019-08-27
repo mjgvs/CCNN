@@ -28,13 +28,15 @@ vectorize_tokens:  This will create vectorized dataset by taking the tokenized
 
 data_path = 'raw_clickbait_data/'
 
-def load_data(TEST_SPLIT=0.2):
+def load_data(TEST_SPLIT=0.2, SEED=1234):
     """This function does the following:
     Load the clickbait datasets
     Select a holdout sample (input: HOLDOUT_SPLIT)
     returns: x_train, y_train, x_test, y_test
     """    
     import numpy as np
+    import random
+    random.seed(SEED)
         
     # Read in the raw data
     f = open(data_path+'clickbait_data', encoding="utf8") 
